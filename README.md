@@ -2,7 +2,7 @@
 
 
 
-### [리눅스 계열 명령어]
+## 리눅스 계열 명령어
 
 
 
@@ -76,7 +76,7 @@
 
 
 
-### Typescript 명령어 정리
+## Typescript 명령어 정리
 
 
 
@@ -211,3 +211,51 @@ class Person{
 }
 let jack : Person = new Person('Jack', 32)
 console.log(jack2)     //Person{name: Jack, age: 32}
+
+
+
+## Ubuntu IoT환경에서 Docker를 활용한 Mosquitto MQTT 브로커 서버 구현 방법  
+
+
+
+```bash
+cd /etc/netplan      
+
+sudo nano 50-cloud-init.yaml  
+
+sudo netplan apply  
+
+sudo init 0  
+
+sudo apt update
+sudo apt upgrade
+
+sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common  
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+sudo add-apt-repository    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \    $(lsb_release -cs) \ stable"   
+
+sudo apt-get update                                                                                                             
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io                                                                                                         
+sudo apt upgrade                                                                                                                                                   
+sudo docker run -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto                                                                                                    
+sudo docker container ls -a                                                                                                      sudo docker container ls                                                                                                         
+
+sudo docker container stop <Container ID 앞 두글자만>                                                                                                                                         
+sudo docker container rm 19                                                                                                                                        
+sudo docker container ls -a                                                                                                     
+
+sudo docker container ls                                                                                                         sudo docker container ls -a                                                                                                                                        
+sudo docker container rm 73 ce                                                                                                                                     
+sudo docker run -it -p 1883:1883 -p 9001:9001 --name k-mosquitto eclipse-mosquitto                                                                                 
+sudo docker container ls                                                                                                                                           
+sudo docker container stop k-mosquitto                                                                                                                             
+sudo docker container ls                                                                                                         sudo docker container ls -a                                                                                                                                        
+sudo docker start k-mosquitto                                                                                                                                      
+sudo docker container ls                                                                                                                                           
+```
+
